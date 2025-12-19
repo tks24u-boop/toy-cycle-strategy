@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="トイ・サイクル戦略室 - おもちゃの『買う・売る・探す』が交差する、賢い親のための戦略拠点。子供のおもちゃを資産として考える新しい視点をご提供します。">
+    <title>トイ・サイクル戦略室 | おもちゃの賢い選び方・売り方・借り方</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'navy': {
+                            50: '#f0f4f8',
+                            100: '#d9e2ec',
+                            200: '#bcccdc',
+                            300: '#9fb3c8',
+                            400: '#829ab1',
+                            500: '#627d98',
+                            600: '#486581',
+                            700: '#334e68',
+                            800: '#243b53',
+                            900: '#102a43',
+                        },
+                        'accent': {
+                            50: '#fff8f0',
+                            100: '#ffedd5',
+                            200: '#fed7aa',
+                            300: '#fdba74',
+                            400: '#fb923c',
+                            500: '#f97316',
+                            600: '#ea580c',
+                            700: '#c2410c',
+                            800: '#9a3412',
+                            900: '#7c2d12',
+                        }
+                    },
+                    fontFamily: {
+                        'sans': ['"Noto Sans JP"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- FontAwesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            line-height: 1.8;
+        }
+        
+        /* スムーズスクロール */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* カードホバーエフェクト */
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(16, 42, 67, 0.15);
+        }
+        
+        /* CTAボタンアニメーション */
+        .cta-button {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .cta-button::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        .cta-button:hover::after {
+            width: 300px;
+            height: 300px;
+        }
+        .cta-button:hover {
+            transform: scale(1.02);
+        }
+        
+        /* スライダーカスタムスクロールバー */
+        .slider-container::-webkit-scrollbar {
+            height: 6px;
+        }
+        .slider-container::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 3px;
+        }
+        .slider-container::-webkit-scrollbar-thumb {
+            background: #bcccdc;
+            border-radius: 3px;
+        }
+        .slider-container::-webkit-scrollbar-thumb:hover {
+            background: #829ab1;
+        }
+        
+        /* 悩みカードのアイコンアニメーション */
+        .worry-card:hover .worry-icon {
+            transform: scale(1.1);
+        }
+        .worry-icon {
+            transition: transform 0.3s ease;
+        }
+        
+        /* ヘッダー固定時のシャドウ */
+        .header-scrolled {
+            box-shadow: 0 2px 10px rgba(16, 42, 67, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-navy-50 text-navy-900">
+    
+    <!-- ヘッダー -->
+    <header id="header" class="fixed top-0 left-0 right-0 bg-white z-50 transition-shadow duration-300">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+            <a href="/" class="flex items-center gap-2">
+                <div class="w-10 h-10 bg-navy-800 rounded-lg flex items-center justify-center">
+                    <i class="fas fa-cube text-accent-400 text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-navy-800 font-bold text-sm md:text-base">トイ・サイクル</span>
+                    <span class="hidden md:inline text-navy-600 text-sm ml-1">戦略室</span>
+                </div>
+            </a>
+            
+            <!-- モバイルメニューボタン -->
+            <button id="menuBtn" class="md:hidden p-2 text-navy-700">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+            
+            <!-- デスクトップナビ -->
+            <nav class="hidden md:flex items-center gap-6">
+                <a href="#find" class="text-navy-700 hover:text-accent-500 transition-colors text-sm font-medium">探す</a>
+                <a href="#sell" class="text-navy-700 hover:text-accent-500 transition-colors text-sm font-medium">売る</a>
+                <a href="#rent" class="text-navy-700 hover:text-accent-500 transition-colors text-sm font-medium">借りる</a>
+                <a href="#worries" class="text-navy-700 hover:text-accent-500 transition-colors text-sm font-medium">悩み別</a>
+            </nav>
+        </div>
+        
+        <!-- モバイルメニュー -->
+        <nav id="mobileMenu" class="hidden md:hidden bg-white border-t border-navy-100">
+            <div class="px-4 py-3 space-y-2">
+                <a href="#find" class="block py-2 text-navy-700 hover:text-accent-500 transition-colors font-medium">探す</a>
+                <a href="#sell" class="block py-2 text-navy-700 hover:text-accent-500 transition-colors font-medium">売る</a>
+                <a href="#rent" class="block py-2 text-navy-700 hover:text-accent-500 transition-colors font-medium">借りる</a>
+                <a href="#worries" class="block py-2 text-navy-700 hover:text-accent-500 transition-colors font-medium">悩み別</a>
+            </div>
+        </nav>
+    </header>
+    
+    <!-- スペーサー（ヘッダー分） -->
+    <div class="h-16"></div>
+    
+    <!-- ヒーローセクション -->
+    <section class="bg-gradient-to-br from-navy-800 via-navy-900 to-navy-800 text-white py-12 md:py-20">
+        <div class="max-w-6xl mx-auto px-4">
+            <!-- キャッチコピー -->
+            <div class="text-center mb-10 md:mb-14">
+                <p class="text-accent-400 text-sm md:text-base font-medium mb-3 tracking-wider">SMART PARENTING STRATEGY</p>
+                <h1 class="text-2xl md:text-4xl lg:text-5xl font-bold leading-tight mb-4">
+                    そのおもちゃ、<br class="md:hidden">捨てますか？<br>
+                    <span class="text-accent-400">資産</span>にしますか？
+                </h1>
+                <p class="text-navy-200 text-sm md:text-base max-w-xl mx-auto leading-relaxed">
+                    おもちゃの「買う・売る・借りる」を戦略的に考える。<br>
+                    賢い親のための情報プラットフォーム。
+                </p>
+            </div>
+            
+            <!-- 3つの主要導線カード -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 max-w-4xl mx-auto">
+                
+                <!-- 探す -->
+                <a href="#find" id="find" class="card-hover bg-white rounded-xl p-6 text-center group">
+                    <div class="w-16 h-16 bg-navy-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-accent-100 transition-colors">
+                        <i class="fas fa-search text-2xl text-navy-600 group-hover:text-accent-500 transition-colors"></i>
+                    </div>
+                    <h3 class="text-navy-800 font-bold text-lg mb-2">探す</h3>
+                    <p class="text-navy-600 text-sm mb-4">失敗しないおもちゃ選び</p>
+                    <span class="inline-flex items-center text-accent-500 text-sm font-medium">
+                        記事を見る <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                    </span>
+                </a>
+                
+                <!-- 売る -->
+                <a href="#sell" id="sell" class="card-hover bg-white rounded-xl p-6 text-center group">
+                    <div class="w-16 h-16 bg-navy-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-accent-100 transition-colors">
+                        <i class="fas fa-yen-sign text-2xl text-navy-600 group-hover:text-accent-500 transition-colors"></i>
+                    </div>
+                    <h3 class="text-navy-800 font-bold text-lg mb-2">売る</h3>
+                    <p class="text-navy-600 text-sm mb-4">最高値での出口戦略</p>
+                    <span class="inline-flex items-center text-accent-500 text-sm font-medium">
+                        記事を見る <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                    </span>
+                </a>
+                
+                <!-- 借りる -->
+                <a href="#rent" id="rent" class="card-hover bg-white rounded-xl p-6 text-center group">
+                    <div class="w-16 h-16 bg-navy-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-accent-100 transition-colors">
+                        <i class="fas fa-sync-alt text-2xl text-navy-600 group-hover:text-accent-500 transition-colors"></i>
+                    </div>
+                    <h3 class="text-navy-800 font-bold text-lg mb-2">借りる</h3>
+                    <p class="text-navy-600 text-sm mb-4">持たない賢い選択</p>
+                    <span class="inline-flex items-center text-accent-500 text-sm font-medium">
+                        記事を見る <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                    </span>
+                </a>
+                
+            </div>
+        </div>
+    </section>
+    
+    <!-- 新着・人気記事スライダー -->
+    <section class="py-12 md:py-16 bg-white">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="flex items-center justify-between mb-6 md:mb-8">
+                <h2 class="text-xl md:text-2xl font-bold text-navy-800">
+                    <i class="fas fa-fire-alt text-accent-500 mr-2"></i>人気の記事
+                </h2>
+                <a href="#" class="text-accent-500 text-sm font-medium hover:text-accent-600 transition-colors">
+                    すべて見る <i class="fas fa-chevron-right ml-1"></i>
+                </a>
+            </div>
+            
+            <!-- スライダー -->
+            <div class="slider-container flex gap-4 overflow-x-auto pb-4 -mx-4 px-4 snap-x snap-mandatory">
+                
+                <!-- 記事カード1 -->
+                <article class="card-hover flex-shrink-0 w-72 md:w-80 bg-navy-50 rounded-xl overflow-hidden snap-start">
+                    <div class="aspect-video bg-gradient-to-br from-navy-200 to-navy-300 relative">
+                        <span class="absolute top-3 left-3 bg-accent-500 text-white text-xs font-medium px-2 py-1 rounded">探す</span>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <i class="fas fa-image text-4xl text-navy-400"></i>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold text-navy-800 mb-2 line-clamp-2 leading-snug">
+                            【2024年最新】知育玩具おすすめランキング15選｜年齢別に徹底比較
+                        </h3>
+                        <p class="text-navy-500 text-sm line-clamp-2 mb-3">
+                            0歳から6歳まで、発達段階に合わせた知育玩具を専門家監修のもと厳選。失敗しない選び方のポイントも解説。
+                        </p>
+                        <div class="flex items-center justify-between text-xs text-navy-400">
+                            <span><i class="far fa-clock mr-1"></i>2024.12.15</span>
+                            <span><i class="far fa-eye mr-1"></i>12,345</span>
+                        </div>
+                    </div>
+                </article>
+                
+                <!-- 記事カード2 -->
+                <article class="card-hover flex-shrink-0 w-72 md:w-80 bg-navy-50 rounded-xl overflow-hidden snap-start">
+                    <div class="aspect-video bg-gradient-to-br from-navy-200 to-navy-300 relative">
+                        <span class="absolute top-3 left-3 bg-navy-700 text-white text-xs font-medium px-2 py-1 rounded">売る</span>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <i class="fas fa-image text-4xl text-navy-400"></i>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold text-navy-800 mb-2 line-clamp-2 leading-snug">
+                            レゴを高く売る方法｜買取相場と査定額アップの5つのコツ
+                        </h3>
+                        <p class="text-navy-500 text-sm line-clamp-2 mb-3">
+                            不要になったレゴを最高値で売却するためのテクニック。買取業者の比較から、査定前にやるべき準備まで完全ガイド。
+                        </p>
+                        <div class="flex items-center justify-between text-xs text-navy-400">
+                            <span><i class="far fa-clock mr-1"></i>2024.12.10</span>
+                            <span><i class="far fa-eye mr-1"></i>8,721</span>
+                        </div>
+                    </div>
+                </article>
+                
+                <!-- 記事カード3 -->
+                <article class="card-hover flex-shrink-0 w-72 md:w-80 bg-navy-50 rounded-xl overflow-hidden snap-start">
+                    <div class="aspect-video bg-gradient-to-br from-navy-200 to-navy-300 relative">
+                        <span class="absolute top-3 left-3 bg-green-600 text-white text-xs font-medium px-2 py-1 rounded">借りる</span>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <i class="fas fa-image text-4xl text-navy-400"></i>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold text-navy-800 mb-2 line-clamp-2 leading-snug">
+                            おもちゃサブスク比較｜トイサブ vs キッズラボラトリー徹底検証
+                        </h3>
+                        <p class="text-navy-500 text-sm line-clamp-2 mb-3">
+                            人気のおもちゃサブスク2社を実際に利用して比較。料金、届くおもちゃの質、解約のしやすさまで本音レビュー。
+                        </p>
+                        <div class="flex items-center justify-between text-xs text-navy-400">
+                            <span><i class="far fa-clock mr-1"></i>2024.12.08</span>
+                            <span><i class="far fa-eye mr-1"></i>6,543</span>
+                        </div>
+                    </div>
+                </article>
+                
+                <!-- 記事カード4 -->
+                <article class="card-hover flex-shrink-0 w-72 md:w-80 bg-navy-50 rounded-xl overflow-hidden snap-start">
+                    <div class="aspect-video bg-gradient-to-br from-navy-200 to-navy-300 relative">
+                        <span class="absolute top-3 left-3 bg-accent-500 text-white text-xs font-medium px-2 py-1 rounded">探す</span>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <i class="fas fa-image text-4xl text-navy-400"></i>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold text-navy-800 mb-2 line-clamp-2 leading-snug">
+                            プラレール入門ガイド｜最初に買うべきセットと拡張の順番
+                        </h3>
+                        <p class="text-navy-500 text-sm line-clamp-2 mb-3">
+                            プラレールデビューに最適なセットの選び方。無駄なく揃えるための購入順序と、長く遊べる拡張プランを解説。
+                        </p>
+                        <div class="flex items-center justify-between text-xs text-navy-400">
+                            <span><i class="far fa-clock mr-1"></i>2024.12.05</span>
+                            <span><i class="far fa-eye mr-1"></i>5,892</span>
+                        </div>
+                    </div>
+                </article>
+                
+                <!-- 記事カード5 -->
+                <article class="card-hover flex-shrink-0 w-72 md:w-80 bg-navy-50 rounded-xl overflow-hidden snap-start">
+                    <div class="aspect-video bg-gradient-to-br from-navy-200 to-navy-300 relative">
+                        <span class="absolute top-3 left-3 bg-navy-700 text-white text-xs font-medium px-2 py-1 rounded">売る</span>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <i class="fas fa-image text-4xl text-navy-400"></i>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold text-navy-800 mb-2 line-clamp-2 leading-snug">
+                            メルカリ vs 買取業者｜おもちゃを売るならどっちが得？
+                        </h3>
+                        <p class="text-navy-500 text-sm line-clamp-2 mb-3">
+                            手間と利益のバランスを徹底検証。おもちゃの種類別に、最適な売却方法を具体的な金額とともに比較。
+                        </p>
+                        <div class="flex items-center justify-between text-xs text-navy-400">
+                            <span><i class="far fa-clock mr-1"></i>2024.12.01</span>
+                            <span><i class="far fa-eye mr-1"></i>4,567</span>
+                        </div>
+                    </div>
+                </article>
+                
+            </div>
+        </div>
+    </section>
+    
+    <!-- 悩み別検索セクション -->
+    <section id="worries" class="py-12 md:py-16 bg-navy-100">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="text-center mb-8 md:mb-10">
+                <h2 class="text-xl md:text-2xl font-bold text-navy-800 mb-3">
+                    <i class="fas fa-lightbulb text-accent-500 mr-2"></i>お悩みから探す
+                </h2>
+                <p class="text-navy-600 text-sm">あなたの悩みに合った解決策を見つけましょう</p>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+                
+                <!-- 悩み1 -->
+                <a href="#" class="worry-card card-hover bg-white rounded-xl p-4 md:p-5 text-center group">
+                    <div class="worry-icon w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <i class="fas fa-box-open text-xl text-red-500"></i>
+                    </div>
+                    <h3 class="text-navy-800 font-medium text-sm md:text-base mb-1">部屋が散らかる</h3>
+                    <p class="text-navy-500 text-xs">収納・整理術</p>
+                </a>
+                
+                <!-- 悩み2 -->
+                <a href="#" class="worry-card card-hover bg-white rounded-xl p-4 md:p-5 text-center group">
+                    <div class="worry-icon w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <i class="fas fa-hourglass-half text-xl text-yellow-600"></i>
+                    </div>
+                    <h3 class="text-navy-800 font-medium text-sm md:text-base mb-1">すぐ飽きる</h3>
+                    <p class="text-navy-500 text-xs">長く遊べる選び方</p>
+                </a>
+                
+                <!-- 悩み3 -->
+                <a href="#" class="worry-card card-hover bg-white rounded-xl p-4 md:p-5 text-center group">
+                    <div class="worry-icon w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <i class="fas fa-coins text-xl text-green-600"></i>
+                    </div>
+                    <h3 class="text-navy-800 font-medium text-sm md:text-base mb-1">高く売りたい</h3>
+                    <p class="text-navy-500 text-xs">買取・フリマ活用</p>
+                </a>
+                
+                <!-- 悩み4 -->
+                <a href="#" class="worry-card card-hover bg-white rounded-xl p-4 md:p-5 text-center group">
+                    <div class="worry-icon w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <i class="fas fa-question-circle text-xl text-blue-500"></i>
+                    </div>
+                    <h3 class="text-navy-800 font-medium text-sm md:text-base mb-1">何を買えばいい？</h3>
+                    <p class="text-navy-500 text-xs">年齢別おすすめ</p>
+                </a>
+                
+                <!-- 悩み5 -->
+                <a href="#" class="worry-card card-hover bg-white rounded-xl p-4 md:p-5 text-center group">
+                    <div class="worry-icon w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <i class="fas fa-brain text-xl text-purple-500"></i>
+                    </div>
+                    <h3 class="text-navy-800 font-medium text-sm md:text-base mb-1">知育に効果ある？</h3>
+                    <p class="text-navy-500 text-xs">効果検証・選び方</p>
+                </a>
+                
+                <!-- 悩み6 -->
+                <a href="#" class="worry-card card-hover bg-white rounded-xl p-4 md:p-5 text-center group">
+                    <div class="worry-icon w-12 h-12 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <i class="fas fa-gift text-xl text-pink-500"></i>
+                    </div>
+                    <h3 class="text-navy-800 font-medium text-sm md:text-base mb-1">プレゼント選び</h3>
+                    <p class="text-navy-500 text-xs">喜ばれるギフト</p>
+                </a>
+                
+                <!-- 悩み7 -->
+                <a href="#" class="worry-card card-hover bg-white rounded-xl p-4 md:p-5 text-center group">
+                    <div class="worry-icon w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <i class="fas fa-sync text-xl text-indigo-500"></i>
+                    </div>
+                    <h3 class="text-navy-800 font-medium text-sm md:text-base mb-1">サブスクどう？</h3>
+                    <p class="text-navy-500 text-xs">レンタル比較</p>
+                </a>
+                
+                <!-- 悩み8 -->
+                <a href="#" class="worry-card card-hover bg-white rounded-xl p-4 md:p-5 text-center group">
+                    <div class="worry-icon w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <i class="fas fa-calculator text-xl text-orange-500"></i>
+                    </div>
+                    <h3 class="text-navy-800 font-medium text-sm md:text-base mb-1">予算を抑えたい</h3>
+                    <p class="text-navy-500 text-xs">コスパ重視選び</p>
+                </a>
+                
+            </div>
+        </div>
+    </section>
+    
+    <!-- カテゴリ別新着記事 -->
+    <section class="py-12 md:py-16 bg-white">
+        <div class="max-w-6xl mx-auto px-4">
+            
+            <!-- 探すカテゴリ -->
+            <div class="mb-12">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-lg md:text-xl font-bold text-navy-800">
+                        <span class="inline-block w-1 h-6 bg-accent-500 mr-3 rounded"></span>
+                        探す｜失敗しないおもちゃ選び
+                    </h2>
+                    <a href="#" class="text-accent-500 text-sm font-medium hover:text-accent-600 transition-colors">
+                        もっと見る <i class="fas fa-chevron-right ml-1"></i>
+                    </a>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <a href="article_template.html" class="card-hover flex gap-4 bg-navy-50 rounded-lg p-4">
+                        <div class="flex-shrink-0 w-24 h-24 bg-gradient-to-br from-navy-200 to-navy-300 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-image text-2xl text-navy-400"></i>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <span class="text-accent-500 text-xs font-medium">探す</span>
+                            <h3 class="font-bold text-navy-800 text-sm md:text-base line-clamp-2 mt-1 mb-2">
+                                【2024年最新】知育玩具おすすめランキング15選｜年齢別に徹底比較
+                            </h3>
+                            <p class="text-navy-500 text-xs line-clamp-2">
+                                0歳から6歳まで、発達段階に合わせた知育玩具を専門家監修のもと厳選。
+                            </p>
+                        </div>
+                    </a>
+                    
+                    <a href="#" class="card-hover flex gap-4 bg-navy-50 rounded-lg p-4">
+                        <div class="flex-shrink-0 w-24 h-24 bg-gradient-to-br from-navy-200 to-navy-300 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-image text-2xl text-navy-400"></i>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <span class="text-accent-500 text-xs font-medium">探す</span>
+                            <h3 class="font-bold text-navy-800 text-sm md:text-base line-clamp-2 mt-1 mb-2">
+                                プラレール入門ガイド｜最初に買うべきセットと拡張の順番
+                            </h3>
+                            <p class="text-navy-500 text-xs line-clamp-2">
+                                プラレールデビューに最適なセットの選び方。無駄なく揃えるための購入順序を解説。
+                            </p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- 売るカテゴリ -->
+            <div class="mb-12">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-lg md:text-xl font-bold text-navy-800">
+                        <span class="inline-block w-1 h-6 bg-navy-700 mr-3 rounded"></span>
+                        売る｜最高値での出口戦略
+                    </h2>
+                    <a href="#" class="text-accent-500 text-sm font-medium hover:text-accent-600 transition-colors">
+                        もっと見る <i class="fas fa-chevron-right ml-1"></i>
+                    </a>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <a href="#" class="card-hover flex gap-4 bg-navy-50 rounded-lg p-4">
+                        <div class="flex-shrink-0 w-24 h-24 bg-gradient-to-br from-navy-200 to-navy-300 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-image text-2xl text-navy-400"></i>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <span class="text-navy-600 text-xs font-medium">売る</span>
+                            <h3 class="font-bold text-navy-800 text-sm md:text-base line-clamp-2 mt-1 mb-2">
+                                レゴを高く売る方法｜買取相場と査定額アップの5つのコツ
+                            </h3>
+                            <p class="text-navy-500 text-xs line-clamp-2">
+                                不要になったレゴを最高値で売却するためのテクニック。買取業者の比較から解説。
+                            </p>
+                        </div>
+                    </a>
+                    
+                    <a href="#" class="card-hover flex gap-4 bg-navy-50 rounded-lg p-4">
+                        <div class="flex-shrink-0 w-24 h-24 bg-gradient-to-br from-navy-200 to-navy-300 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-image text-2xl text-navy-400"></i>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <span class="text-navy-600 text-xs font-medium">売る</span>
+                            <h3 class="font-bold text-navy-800 text-sm md:text-base line-clamp-2 mt-1 mb-2">
+                                メルカリ vs 買取業者｜おもちゃを売るならどっちが得？
+                            </h3>
+                            <p class="text-navy-500 text-xs line-clamp-2">
+                                手間と利益のバランスを徹底検証。おもちゃの種類別に最適な売却方法を比較。
+                            </p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- 借りるカテゴリ -->
+            <div>
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-lg md:text-xl font-bold text-navy-800">
+                        <span class="inline-block w-1 h-6 bg-green-600 mr-3 rounded"></span>
+                        借りる｜持たない賢い選択
+                    </h2>
+                    <a href="#" class="text-accent-500 text-sm font-medium hover:text-accent-600 transition-colors">
+                        もっと見る <i class="fas fa-chevron-right ml-1"></i>
+                    </a>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <a href="#" class="card-hover flex gap-4 bg-navy-50 rounded-lg p-4">
+                        <div class="flex-shrink-0 w-24 h-24 bg-gradient-to-br from-navy-200 to-navy-300 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-image text-2xl text-navy-400"></i>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <span class="text-green-600 text-xs font-medium">借りる</span>
+                            <h3 class="font-bold text-navy-800 text-sm md:text-base line-clamp-2 mt-1 mb-2">
+                                おもちゃサブスク比較｜トイサブ vs キッズラボラトリー徹底検証
+                            </h3>
+                            <p class="text-navy-500 text-xs line-clamp-2">
+                                人気のおもちゃサブスク2社を実際に利用して比較。料金、届くおもちゃの質を検証。
+                            </p>
+                        </div>
+                    </a>
+                    
+                    <a href="#" class="card-hover flex gap-4 bg-navy-50 rounded-lg p-4">
+                        <div class="flex-shrink-0 w-24 h-24 bg-gradient-to-br from-navy-200 to-navy-300 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-image text-2xl text-navy-400"></i>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <span class="text-green-600 text-xs font-medium">借りる</span>
+                            <h3 class="font-bold text-navy-800 text-sm md:text-base line-clamp-2 mt-1 mb-2">
+                                おもちゃサブスクは本当にお得？1年使って分かったメリット・デメリット
+                            </h3>
+                            <p class="text-navy-500 text-xs line-clamp-2">
+                                実際に1年間利用した筆者が、リアルな感想と費用対効果を正直にレビュー。
+                            </p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+    
+    <!-- CTA セクション -->
+    <section class="py-12 md:py-16 bg-gradient-to-r from-navy-800 to-navy-900">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <h2 class="text-xl md:text-2xl font-bold text-white mb-4">
+                おもちゃの「最適解」を見つけよう
+            </h2>
+            <p class="text-navy-200 text-sm md:text-base mb-8 max-w-xl mx-auto">
+                買う・売る・借りる、それぞれの選択肢を知ることで、<br class="hidden md:inline">
+                おもちゃとの付き合い方が変わります。
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#find" class="cta-button bg-accent-500 hover:bg-accent-600 text-white font-bold py-4 px-8 rounded-lg text-sm md:text-base">
+                    <i class="fas fa-search mr-2"></i>おもちゃを探す
+                </a>
+                <a href="#worries" class="cta-button bg-white hover:bg-navy-50 text-navy-800 font-bold py-4 px-8 rounded-lg text-sm md:text-base">
+                    <i class="fas fa-lightbulb mr-2"></i>悩みから探す
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- フッター -->
+    <footer class="bg-navy-900 text-navy-300 py-10 md:py-12">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
+                
+                <!-- サイト情報 -->
+                <div class="col-span-2 md:col-span-1">
+                    <div class="flex items-center gap-2 mb-4">
+                        <div class="w-8 h-8 bg-navy-700 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-cube text-accent-400 text-sm"></i>
+                        </div>
+                        <span class="text-white font-bold text-sm">トイ・サイクル戦略室</span>
+                    </div>
+                    <p class="text-xs text-navy-400 leading-relaxed">
+                        おもちゃの「買う・売る・借りる」を戦略的に考える、賢い親のための情報メディア。
+                    </p>
+                </div>
+                
+                <!-- カテゴリ -->
+                <div>
+                    <h4 class="text-white font-bold text-sm mb-4">カテゴリ</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="hover:text-accent-400 transition-colors">探す</a></li>
+                        <li><a href="#" class="hover:text-accent-400 transition-colors">売る</a></li>
+                        <li><a href="#" class="hover:text-accent-400 transition-colors">借りる</a></li>
+                    </ul>
+                </div>
+                
+                <!-- 人気記事 -->
+                <div>
+                    <h4 class="text-white font-bold text-sm mb-4">人気記事</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="hover:text-accent-400 transition-colors">知育玩具ランキング</a></li>
+                        <li><a href="#" class="hover:text-accent-400 transition-colors">レゴ買取ガイド</a></li>
+                        <li><a href="#" class="hover:text-accent-400 transition-colors">サブスク比較</a></li>
+                    </ul>
+                </div>
+                
+                <!-- 運営情報 -->
+                <div>
+                    <h4 class="text-white font-bold text-sm mb-4">運営情報</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="hover:text-accent-400 transition-colors">運営者情報</a></li>
+                        <li><a href="#" class="hover:text-accent-400 transition-colors">プライバシーポリシー</a></li>
+                        <li><a href="#" class="hover:text-accent-400 transition-colors">お問い合わせ</a></li>
+                    </ul>
+                </div>
+                
+            </div>
+            
+            <!-- コピーライト -->
+            <div class="border-t border-navy-700 pt-6 text-center">
+                <p class="text-xs text-navy-500">
+                    © 2024 トイ・サイクル戦略室 All Rights Reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- JavaScript -->
+    <script>
+        // モバイルメニュートグル
+        const menuBtn = document.getElementById('menuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // モバイルメニューのリンククリックで閉じる
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+        
+        // ヘッダースクロール時のシャドウ
+        const header = document.getElementById('header');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 10) {
+                header.classList.add('header-scrolled');
+            } else {
+                header.classList.remove('header-scrolled');
+            }
+        });
+        
+        // スムーズスクロール（アンカーリンク用）
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#') {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        const headerOffset = 80;
+                        const elementPosition = target.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                        
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            });
+        });
+    </script>
+    
+</body>
+</html>

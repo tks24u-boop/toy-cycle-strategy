@@ -1,0 +1,70 @@
+{
+  "articles": [
+    {
+      "id": "sample-001",
+      "url": "https://note.com/example/n/sample1",
+      "title": "【体験談】トイサブを1年使ってみた正直な感想｜メリット・デメリットを徹底解説",
+      "description": "おもちゃサブスクの代表格「トイサブ」を実際に1年間利用した筆者が、届いたおもちゃの質、子どもの反応、コスパについて正直にレビューします。",
+      "image": "",
+      "category": "借りる",
+      "source": "note.com",
+      "addedDate": "2024-12-15T10:00:00Z",
+      "views": 1234
+    },
+    {
+      "id": "sample-002",
+      "url": "https://note.com/example/n/sample2",
+      "title": "レゴを高く売るコツ｜買取業者とメルカリ、どっちがお得？実際に比較してみた",
+      "description": "不要になったレゴを売却する際、買取業者とメルカリではどちらが高く売れるのか？実際に同じセットを両方で売って比較検証しました。",
+      "image": "",
+      "category": "売る",
+      "source": "note.com",
+      "addedDate": "2024-12-14T09:30:00Z",
+      "views": 892
+    },
+    {
+      "id": "sample-003",
+      "url": "https://note.com/example/n/sample3",
+      "title": "【2024年版】0歳〜1歳におすすめの知育玩具10選｜発達段階に合わせた選び方",
+      "description": "赤ちゃんの発達を促す知育玩具を、保育士監修のもと厳選。五感を刺激するおもちゃから、手先の発達を促すものまで幅広くご紹介。",
+      "image": "",
+      "category": "探す",
+      "source": "note.com",
+      "addedDate": "2024-12-13T14:00:00Z",
+      "views": 2156
+    },
+    {
+      "id": "sample-004",
+      "url": "https://twitter.com/example/status/sample4",
+      "title": "プラレールの収納術｜100均グッズでスッキリ片付ける方法",
+      "description": "散らかりがちなプラレールを100均アイテムでスッキリ収納！実際に使っている収納方法を写真付きで紹介します。",
+      "image": "",
+      "category": "探す",
+      "source": "X (Twitter)",
+      "addedDate": "2024-12-12T11:00:00Z",
+      "views": 567
+    },
+    {
+      "id": "sample-005",
+      "url": "https://note.com/example/n/sample5",
+      "title": "おもちゃサブスク3社を徹底比較｜トイサブ・キッズラボラトリー・イクプル",
+      "description": "人気のおもちゃサブスク3社を、料金・届くおもちゃの質・交換頻度・衛生管理の観点から徹底比較。あなたに合うサービスが見つかります。",
+      "image": "",
+      "category": "借りる",
+      "source": "note.com",
+      "addedDate": "2024-12-11T16:30:00Z",
+      "views": 1876
+    },
+    {
+      "id": "sample-006",
+      "url": "https://note.com/example/n/sample6",
+      "title": "シルバニアファミリーの買取相場まとめ｜高く売れるシリーズはこれだ！",
+      "description": "シルバニアファミリーの買取相場を徹底調査。廃盤品や限定品など、高価買取が期待できるシリーズをランキング形式で紹介します。",
+      "image": "",
+      "category": "売る",
+      "source": "note.com",
+      "addedDate": "2024-12-10T08:00:00Z",
+      "views": 744
+    }
+  ]
+}

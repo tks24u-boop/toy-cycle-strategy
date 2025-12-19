@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="トイ・サイクル戦略室 - おもちゃに関する厳選記事をカテゴリ別に探せます。">
+    <title>記事一覧 | トイ・サイクル戦略室</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'navy': {
+                            50: '#f0f4f8',
+                            100: '#d9e2ec',
+                            200: '#bcccdc',
+                            300: '#9fb3c8',
+                            400: '#829ab1',
+                            500: '#627d98',
+                            600: '#486581',
+                            700: '#334e68',
+                            800: '#243b53',
+                            900: '#102a43',
+                        },
+                        'accent': {
+                            50: '#fff8f0',
+                            100: '#ffedd5',
+                            200: '#fed7aa',
+                            300: '#fdba74',
+                            400: '#fb923c',
+                            500: '#f97316',
+                            600: '#ea580c',
+                            700: '#c2410c',
+                            800: '#9a3412',
+                            900: '#7c2d12',
+                        }
+                    },
+                    fontFamily: {
+                        'sans': ['"Noto Sans JP"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- FontAwesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            line-height: 1.8;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(16, 42, 67, 0.15);
+        }
+        
+        .header-scrolled {
+            box-shadow: 0 2px 10px rgba(16, 42, 67, 0.1);
+        }
+        
+        .img-placeholder {
+            background: linear-gradient(135deg, #bcccdc 0%, #9fb3c8 100%);
+        }
+        
+        .tab-active {
+            border-bottom-color: #f97316;
+            color: #f97316;
+        }
+        
+        .external-badge {
+            font-size: 0.65rem;
+            letter-spacing: 0.05em;
+        }
+        
+        .loading {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: .5; }
+        }
+    </style>
+</head>
+<body class="bg-navy-50 text-navy-900">
+    
+    <!-- ヘッダー -->
+    <header id="header" class="fixed top-0 left-0 right-0 bg-white z-50 transition-shadow duration-300">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+            <a href="/" class="flex items-center gap-2">
+                <div class="w-10 h-10 bg-navy-800 rounded-lg flex items-center justify-center">
+                    <i class="fas fa-cube text-accent-400 text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-navy-800 font-bold text-sm md:text-base">トイ・サイクル</span>
+                    <span class="hidden md:inline text-navy-600 text-sm ml-1">戦略室</span>
+                </div>
+            </a>
+            
+            <button id="menuBtn" class="md:hidden p-2 text-navy-700">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+            
+            <nav class="hidden md:flex items-center gap-6">
+                <a href="category.html?cat=探す" class="text-navy-700 hover:text-accent-500 transition-colors text-sm font-medium">探す</a>
+                <a href="category.html?cat=売る" class="text-navy-700 hover:text-accent-500 transition-colors text-sm font-medium">売る</a>
+                <a href="category.html?cat=借りる" class="text-navy-700 hover:text-accent-500 transition-colors text-sm font-medium">借りる</a>
+            </nav>
+        </div>
+        
+        <nav id="mobileMenu" class="hidden md:hidden bg-white border-t border-navy-100">
+            <div class="px-4 py-3 space-y-2">
+                <a href="category.html?cat=探す" class="block py-2 text-navy-700 hover:text-accent-500 transition-colors font-medium">探す</a>
+                <a href="category.html?cat=売る" class="block py-2 text-navy-700 hover:text-accent-500 transition-colors font-medium">売る</a>
+                <a href="category.html?cat=借りる" class="block py-2 text-navy-700 hover:text-accent-500 transition-colors font-medium">借りる</a>
+            </div>
+        </nav>
+    </header>
+    
+    <div class="h-16"></div>
+    
+    <!-- ページヘッダー -->
+    <section class="bg-gradient-to-r from-navy-800 to-navy-900 text-white py-8 md:py-12">
+        <div class="max-w-6xl mx-auto px-4">
+            <nav class="text-sm mb-4">
+                <a href="/" class="text-navy-300 hover:text-white transition-colors">ホーム</a>
+                <span class="text-navy-500 mx-2">/</span>
+                <span id="breadcrumbCategory" class="text-white">記事一覧</span>
+            </nav>
+            <h1 id="pageTitle" class="text-2xl md:text-3xl font-bold">
+                <i id="pageTitleIcon" class="fas fa-list mr-3"></i>記事一覧
+            </h1>
+            <p id="pageDescription" class="text-navy-200 text-sm mt-2">厳選されたおもちゃ関連の記事をご紹介</p>
+        </div>
+    </section>
+    
+    <!-- カテゴリタブ -->
+    <section class="bg-white border-b border-navy-100 sticky top-16 z-40">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="flex overflow-x-auto -mb-px">
+                <button data-category="all" class="category-tab flex-shrink-0 px-6 py-4 text-sm font-medium text-navy-500 border-b-2 border-transparent hover:text-navy-700 transition-colors">
+                    すべて
+                </button>
+                <button data-category="探す" class="category-tab flex-shrink-0 px-6 py-4 text-sm font-medium text-navy-500 border-b-2 border-transparent hover:text-navy-700 transition-colors">
+                    <i class="fas fa-search mr-1"></i>探す
+                </button>
+                <button data-category="売る" class="category-tab flex-shrink-0 px-6 py-4 text-sm font-medium text-navy-500 border-b-2 border-transparent hover:text-navy-700 transition-colors">
+                    <i class="fas fa-yen-sign mr-1"></i>売る
+                </button>
+                <button data-category="借りる" class="category-tab flex-shrink-0 px-6 py-4 text-sm font-medium text-navy-500 border-b-2 border-transparent hover:text-navy-700 transition-colors">
+                    <i class="fas fa-sync-alt mr-1"></i>借りる
+                </button>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 記事一覧 -->
+    <main class="py-8 md:py-12">
+        <div class="max-w-6xl mx-auto px-4">
+            
+            <!-- 件数表示 -->
+            <div class="flex items-center justify-between mb-6">
+                <p id="resultCount" class="text-navy-500 text-sm">
+                    <i class="fas fa-spinner fa-spin mr-1"></i>読み込み中...
+                </p>
+                <select id="sortOrder" class="border border-navy-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-accent-500">
+                    <option value="newest">新着順</option>
+                    <option value="popular">人気順</option>
+                </select>
+            </div>
+            
+            <!-- 記事グリッド -->
+            <div id="articleGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- ローディング -->
+                <div class="loading col-span-full flex justify-center py-12">
+                    <i class="fas fa-spinner fa-spin text-3xl text-navy-400"></i>
+                </div>
+            </div>
+            
+            <!-- ページネーション（将来用） -->
+            <div id="pagination" class="hidden mt-8 flex justify-center gap-2">
+                <!-- ページネーションボタン -->
+            </div>
+            
+        </div>
+    </main>
+    
+    <!-- フッター -->
+    <footer class="bg-navy-900 text-navy-300 py-10 md:py-12">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
+                <div class="col-span-2 md:col-span-1">
+                    <div class="flex items-center gap-2 mb-4">
+                        <div class="w-8 h-8 bg-navy-700 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-cube text-accent-400 text-sm"></i>
+                        </div>
+                        <span class="text-white font-bold text-sm">トイ・サイクル戦略室</span>
+                    </div>
+                    <p class="text-xs text-navy-400 leading-relaxed">
+                        おもちゃの「買う・売る・借りる」に関する厳選記事をキュレーション。賢い親のための情報メディア。
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="text-white font-bold text-sm mb-4">カテゴリ</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="category.html?cat=探す" class="hover:text-accent-400 transition-colors">探す</a></li>
+                        <li><a href="category.html?cat=売る" class="hover:text-accent-400 transition-colors">売る</a></li>
+                        <li><a href="category.html?cat=借りる" class="hover:text-accent-400 transition-colors">借りる</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-white font-bold text-sm mb-4">サイトについて</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="hover:text-accent-400 transition-colors">運営者情報</a></li>
+                        <li><a href="#" class="hover:text-accent-400 transition-colors">プライバシーポリシー</a></li>
+                        <li><a href="#" class="hover:text-accent-400 transition-colors">お問い合わせ</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-white font-bold text-sm mb-4">ご注意</h4>
+                    <p class="text-xs text-navy-400 leading-relaxed">
+                        本サイトは外部記事へのリンク集です。各記事の内容は元サイトの著作者に帰属します。
+                    </p>
+                </div>
+            </div>
+            
+            <div class="border-t border-navy-700 pt-6 text-center">
+                <p class="text-xs text-navy-500">
+                    © 2024 トイ・サイクル戦略室 All Rights Reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- JavaScript -->
+    <script>
+        // 要素取得
+        const menuBtn = document.getElementById('menuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const header = document.getElementById('header');
+        const articleGrid = document.getElementById('articleGrid');
+        const resultCount = document.getElementById('resultCount');
+        const sortOrder = document.getElementById('sortOrder');
+        const categoryTabs = document.querySelectorAll('.category-tab');
+        
+        let currentCategory = 'all';
+        let allArticles = [];
+        
+        // モバイルメニュートグル
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // ヘッダースクロール時のシャドウ
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 10) {
+                header.classList.add('header-scrolled');
+            } else {
+                header.classList.remove('header-scrolled');
+            }
+        });
+        
+        // カテゴリ情報
+        const categoryInfo = {
+            'all': {
+                title: '記事一覧',
+                description: '厳選されたおもちゃ関連の記事をご紹介',
+                icon: 'fa-list',
+                breadcrumb: '記事一覧'
+            },
+            '探す': {
+                title: '探す｜失敗しないおもちゃ選び',
+                description: '年齢別・目的別のおもちゃ選びガイド',
+                icon: 'fa-search',
+                breadcrumb: '探す'
+            },
+            '売る': {
+                title: '売る｜最高値での出口戦略',
+                description: 'おもちゃを高く売るためのノウハウ',
+                icon: 'fa-yen-sign',
+                breadcrumb: '売る'
+            },
+            '借りる': {
+                title: '借りる｜持たない賢い選択',
+                description: 'おもちゃサブスクの比較・レビュー',
+                icon: 'fa-sync-alt',
+                breadcrumb: '借りる'
+            }
+        };
+        
+        // カテゴリラベルの色
+        function getCategoryColor(category) {
+            switch(category) {
+                case '探す': return 'bg-accent-500';
+                case '売る': return 'bg-navy-700';
+                case '借りる': return 'bg-green-600';
+                default: return 'bg-navy-500';
+            }
+        }
+        
+        // 日付フォーマット
+        function formatDate(dateStr) {
+            const date = new Date(dateStr);
+            return date.toLocaleDateString('ja-JP', { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\//g, '.');
+        }
+        
+        // 閲覧数フォーマット
+        function formatViews(views) {
+            if (views >= 1000) {
+                return (views / 1000).toFixed(1) + 'K';
+            }
+            return views.toLocaleString();
+        }
+        
+        // 記事カードHTML生成
+        function createArticleCard(article) {
+            const categoryColor = getCategoryColor(article.category);
+            const imageHtml = article.image 
+                ? `<img src="${article.image}" alt="" class="w-full h-full object-cover" loading="lazy" onerror="this.style.display='none'">`
+                : `<div class="absolute inset-0 flex items-center justify-center"><i class="fas fa-newspaper text-4xl text-navy-400"></i></div>`;
+            
+            return `
+                <article class="card-hover bg-white rounded-xl overflow-hidden shadow-sm">
+                    <div class="aspect-video img-placeholder relative">
+                        ${imageHtml}
+                        <span class="absolute top-3 left-3 ${categoryColor} text-white text-xs font-medium px-2 py-1 rounded">${article.category}</span>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="font-bold text-navy-800 mb-2 line-clamp-2 leading-snug">${article.title}</h3>
+                        <p class="text-navy-500 text-sm line-clamp-2 mb-4">${article.description}</p>
+                        <div class="flex items-center justify-between text-xs text-navy-400 mb-4">
+                            <span><i class="far fa-clock mr-1"></i>${formatDate(article.addedDate)}</span>
+                            <span><i class="far fa-eye mr-1"></i>${formatViews(article.views)}</span>
+                        </div>
+                        <a href="${article.url}" target="_blank" rel="noopener" 
+                           onclick="trackView('${article.id}')"
+                           class="block text-center bg-accent-500 text-white py-3 px-4 rounded-lg hover:bg-accent-600 transition-colors font-medium">
+                            続きを読む <i class="fas fa-external-link-alt ml-1"></i>
+                        </a>
+                        <p class="text-xs text-navy-400 mt-3 text-center external-badge">
+                            <i class="fas fa-external-link-alt mr-1"></i>外部記事 | ${article.source}
+                        </p>
+                    </div>
+                </article>
+            `;
+        }
+        
+        // 閲覧数トラッキング
+        function trackView(articleId) {
+            fetch(`/api/articles/${articleId}/view`, { method: 'POST' }).catch(() => {});
+        }
+        
+        // ページ情報を更新
+        function updatePageInfo(category) {
+            const info = categoryInfo[category] || categoryInfo['all'];
+            document.getElementById('pageTitle').innerHTML = `<i id="pageTitleIcon" class="fas ${info.icon} mr-3"></i>${info.title}`;
+            document.getElementById('pageDescription').textContent = info.description;
+            document.getElementById('breadcrumbCategory').textContent = info.breadcrumb;
+            document.title = `${info.breadcrumb} | トイ・サイクル戦略室`;
+        }
+        
+        // タブを更新
+        function updateTabs(category) {
+            categoryTabs.forEach(tab => {
+                if (tab.dataset.category === category) {
+                    tab.classList.add('tab-active');
+                } else {
+                    tab.classList.remove('tab-active');
+                }
+            });
+        }
+        
+        // 記事を表示
+        function displayArticles(articles) {
+            if (articles.length === 0) {
+                articleGrid.innerHTML = `
+                    <div class="col-span-full text-center py-12">
+                        <i class="fas fa-inbox text-4xl text-navy-300 mb-4"></i>
+                        <p class="text-navy-500">記事がまだありません</p>
+                    </div>
+                `;
+                resultCount.textContent = '0件の記事';
+                return;
+            }
+            
+            articleGrid.innerHTML = articles.map(createArticleCard).join('');
+            resultCount.textContent = `${articles.length}件の記事`;
+        }
+        
+        // 記事をフィルタ・ソート
+        function filterAndSortArticles() {
+            let filtered = [...allArticles];
+            
+            // カテゴリフィルタ
+            if (currentCategory !== 'all') {
+                filtered = filtered.filter(a => a.category === currentCategory);
+            }
+            
+            // ソート
+            const sort = sortOrder.value;
+            if (sort === 'newest') {
+                filtered.sort((a, b) => new Date(b.addedDate) - new Date(a.addedDate));
+            } else if (sort === 'popular') {
+                filtered.sort((a, b) => b.views - a.views);
+            }
+            
+            displayArticles(filtered);
+        }
+        
+        // 記事を読み込み
+        async function loadArticles() {
+            try {
+                const res = await fetch('/api/articles');
+                const data = await res.json();
+                allArticles = data.articles;
+                filterAndSortArticles();
+            } catch (error) {
+                console.error('記事の読み込みに失敗しました:', error);
+                articleGrid.innerHTML = `
+                    <div class="col-span-full text-center py-12">
+                        <i class="fas fa-exclamation-circle text-4xl text-red-400 mb-4"></i>
+                        <p class="text-red-500">記事の読み込みに失敗しました</p>
+                    </div>
+                `;
+            }
+        }
+        
+        // タブクリック
+        categoryTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                currentCategory = tab.dataset.category;
+                updateTabs(currentCategory);
+                updatePageInfo(currentCategory);
+                filterAndSortArticles();
+                
+                // URL更新
+                const url = new URL(window.location);
+                if (currentCategory === 'all') {
+                    url.searchParams.delete('cat');
+                } else {
+                    url.searchParams.set('cat', currentCategory);
+                }
+                history.pushState({}, '', url);
+            });
+        });
+        
+        // ソート変更
+        sortOrder.addEventListener('change', filterAndSortArticles);
+        
+        // 初期化
+        document.addEventListener('DOMContentLoaded', () => {
+            // URLパラメータからカテゴリを取得
+            const params = new URLSearchParams(window.location.search);
+            const cat = params.get('cat');
+            if (cat && ['探す', '売る', '借りる'].includes(cat)) {
+                currentCategory = cat;
+            }
+            
+            updateTabs(currentCategory);
+            updatePageInfo(currentCategory);
+            loadArticles();
+        });
+    </script>
+    
+</body>
+</html>
