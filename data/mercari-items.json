@@ -1,0 +1,16 @@
+{
+  "items": [
+    {
+      "id": "001",
+      "name": "アンパンマン おもちゃセット",
+      "price": 1500,
+      "image": "images/mercari/placeholder.jpg",
+      "description": "ほぼ未使用、美品です。2歳前後のお子様におすすめ。",
+      "url": "https://jp.mercari.com/item/m70641465396",
+      "status": "active",
+      "category": "おもちゃ",
+      "addedDate": "2026-01-09",
+      "soldDate": null
+    }
+  ]
+}

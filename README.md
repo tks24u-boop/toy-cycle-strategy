@@ -1,46 +1,48 @@
-# トイ・サイクル戦略室 - キュレーションサイト
+# まにまにパパの情報発信サイト - note記事ポートフォリオ
 
-おもちゃに関する外部記事（note、X、ブログ等）のURLを収集し、キュレーションサイトとして表示するWebアプリケーションです。
+子育て中のパパが運営する、note記事を中心としたポートフォリオサイトです。情報提供をメインとしつつ、楽天ROOMとメルカリへの自然な導線を設けています。
 
 ## ✨ 主な機能
 
-- **OGP自動取得**: URLを入力するだけで、記事のタイトル・説明・サムネイル画像を自動で取得します。
-- **シンプルな管理画面**: 直感的なUIで、誰でも簡単に記事の追加・削除ができます。
-- **カテゴリ分類**: 「探す」「売る」「借りる」の3つのカテゴリで記事を分類・表示できます。
-- **動的なページ生成**: 登録された記事データ（JSON）を元に、トップページやカテゴリページを動的に生成します。
-- **レスポンシブデザイン**: モバイル、タブレット、PCの各デバイスに最適化されています。
-- **閲覧数カウント**: 記事の「続きを読む」ボタンがクリックされると閲覧数をカウントし、人気記事の表示に利用します。
+- **note記事表示**: 自分が執筆したnote記事を見やすくカード形式で表示
+- **参考記事リンク集**: 参考にしたnote記事を自分のコメント付きで紹介
+- **楽天ROOM導線**: アフィリエイトリンクを含む楽天ROOMへの誘導バナー
+- **メルカリ出品商品**: 手動管理による出品中のおもちゃ情報表示
+- **レスポンシブデザイン**: スマホファーストで各デバイスに最適化
+- **法的配慮**: プライバシーポリシー・アフィリエイト表記を明記
 
 ## 📂 ディレクトリ構造
 
 ```
 /toy-cycle-strategy
-├── public/                  # 公開ディレクトリ
-│   ├── index.html           # トップページ
-│   ├── admin.html           # 管理画面
-│   └── category.html        # カテゴリページ
+├── public/                      # 公開ディレクトリ
+│   ├── index.html               # トップページ
+│   ├── css/
+│   │   └── style.css            # メインスタイルシート
+│   ├── js/
+│   │   └── main.js              # メインJavaScript
+│   ├── images/
+│   │   └── mercari/             # メルカリ商品画像（自分で撮影したもの）
+│   └── admin/
+│       └── mercari-form.html    # メルカリ商品登録フォーム
 ├── data/
-│   └── articles.json        # 記事データ（DBの代わり）
-├── node_modules/
-├── server.js                # Expressサーバー本体
-├── package.json             # 依存パッケージ定義
-└── README.md                # このファイル
+│   ├── my-articles.json         # 自分のnote記事データ
+│   ├── reference-articles.json  # 参考記事データ
+│   └── mercari-items.json       # メルカリ商品データ
+├── server.js                    # Expressサーバー本体
+├── package.json                 # 依存パッケージ定義
+└── README.md                    # このファイル
 ```
 
 ## 🚀 セットアップと実行方法
 
 ### 1. 依存パッケージのインストール
 
-プロジェクトのルートディレクトリで以下のコマンドを実行し、必要なNode.jsパッケージをインストールします。
-
 ```bash
-cd /home/ubuntu/toy-cycle-strategy
 npm install
 ```
 
 ### 2. サーバーの起動
-
-以下のコマンドでNode.jsサーバーを起動します。
 
 ```bash
 npm start
@@ -51,43 +53,176 @@ npm start
 ```
 🚀 トイ・サイクル戦略室 サーバー起動
    http://localhost:3000
-   管理画面: http://localhost:3000/admin.html
 ```
 
 ### 3. アプリケーションへのアクセス
 
 - **サイトトップ**: `http://localhost:3000`
-- **管理画面**: `http://localhost:3000/admin.html`
+- **メルカリ商品登録フォーム**: `http://localhost:3000/admin/mercari-form.html`
 
-## 使い方
+## 📝 記事・商品の追加方法
 
-### 記事の追加
+### 自分のnote記事を追加
 
-1.  管理画面 (`/admin.html`) にアクセスします。
-2.  追加したい記事のURLを入力し、「情報を取得」ボタンをクリックします。
-3.  タイトル、説明、画像が自動で入力されるので、必要に応じて修正します。
-4.  カテゴリ（探す/売る/借りる）を選択します。
-5.  「記事を追加する」ボタンをクリックします。
+1. `data/my-articles.json` を開く
+2. `articles` 配列に新しい記事を追加：
 
-### 記事の削除
+```json
+{
+  "id": 2,
+  "title": "記事のタイトル",
+  "url": "https://note.com/manimani_510/n/...",
+  "thumbnail": "",
+  "date": "2026-01-09",
+  "views": 0,
+  "category": "子育て",
+  "description": "記事の簡単な説明"
+}
+```
 
-1.  管理画面の下部にある「登録済み記事一覧」から、削除したい記事のゴミ箱アイコンをクリックします。
-2.  確認モーダルが表示されるので、「削除する」ボタンをクリックします。
+### 参考記事を追加
+
+1. `data/reference-articles.json` を開く
+2. `articles` 配列に新しい記事を追加：
+
+```json
+{
+  "id": 2,
+  "title": "参考記事のタイトル",
+  "author": "noteユーザー名",
+  "authorUrl": "https://note.com/username",
+  "articleUrl": "https://note.com/username/n/...",
+  "myComment": "この記事のおかげで○○が解決できました。",
+  "addedDate": "2026-01-09",
+  "category": "子育て"
+}
+```
+
+### メルカリ商品を追加
+
+#### 方法1: フォームを使用（推奨）
+
+1. `http://localhost:3000/admin/mercari-form.html` にアクセス
+2. 商品情報を入力（商品を自分で撮影した写真を使用してください）
+3. 「JSONコード生成」ボタンをクリック
+4. 生成されたJSONをコピー
+5. `data/mercari-items.json` を開き、`items` 配列に貼り付け
+
+#### 方法2: 直接編集
+
+1. 商品を撮影
+2. 画像を `public/images/mercari/` に保存（例: item001.jpg）
+3. `data/mercari-items.json` を開く
+4. `items` 配列に新しい商品を追加：
+
+```json
+{
+  "id": "002",
+  "name": "商品名",
+  "price": 1500,
+  "image": "images/mercari/item002.jpg",
+  "description": "商品の説明",
+  "url": "https://jp.mercari.com/item/m...",
+  "status": "active",
+  "category": "おもちゃ",
+  "addedDate": "2026-01-09",
+  "soldDate": null
+}
+```
+
+### 商品が売れた時の処理
+
+`data/mercari-items.json` で該当商品の `status` を変更：
+
+```json
+"status": "sold"
+```
+
+または、配列から削除してもOKです。
+
+## 🛠️ カスタマイズ方法
+
+### サイト名の変更
+
+`public/index.html` の以下の部分を編集：
+
+```html
+<h1 class="site-title">まにまにパパの情報発信サイト</h1>
+<title>まにまにパパの情報発信サイト</title>
+```
+
+### 楽天ROOMのURLを変更
+
+`public/index.html` の以下の部分を編集：
+
+```html
+<a href="https://room.rakuten.co.jp/your-room-id" ...>
+```
+
+### 色の変更
+
+`public/css/style.css` の `:root` セクションで色を変更できます：
+
+```css
+:root {
+  --main-color: #4A90E2;      /* メインカラー */
+  --accent-color: #FF6B6B;    /* アクセントカラー */
+  --rakuten-color: #BF0000;   /* 楽天ROOMカラー */
+}
+```
+
+## ⚠️ 重要な注意事項
+
+### 法的配慮
+
+1. **画像使用ルール**
+   - メルカリ商品：必ず自分で撮影した写真のみ使用
+   - スクリーンショットは使用禁止
+   - 他人が撮影した画像は無断使用禁止
+
+2. **著作権配慮**
+   - 他人のnote記事：タイトル+リンク+自分のコメントのみ
+   - 全文転載は禁止
+
+3. **アフィリエイト表記**
+   - 楽天ROOMリンクには「アフィリエイトリンクを含む」旨を明記済み
+
+4. **プライバシー**
+   - 子どもの写真は使用しない
+   - 個人情報は最小限に
 
 ## 🛠️ 技術スタック
 
-- **フロントエンド**: HTML5, Tailwind CSS, Vanilla JavaScript
+- **フロントエンド**: HTML5, CSS3, Vanilla JavaScript
 - **バックエンド**: Node.js, Express
-- **データ取得**: node-fetch, Cheerio (OGP情報スクレイピング)
 - **データストア**: JSONファイル
+- **デプロイ**: 静的サイトホスティング（Vercel, Netlify等）対応
 
-## 📝 APIエンドポイント
+## 📱 レスポンシブ対応
 
-| メソッド | URL | 説明 |
-|---|---|---|
-| `GET` | `/api/articles` | 全ての記事を取得。カテゴリでの絞り込みも可能 (`?category=探す`)。 |
-| `GET` | `/api/articles/popular` | 人気記事（閲覧数順）を取得。 |
-| `POST` | `/api/ogp/preview` | 指定されたURLのOGP情報を取得。 |
-| `POST` | `/api/articles` | 新しい記事を追加。 |
-| `DELETE` | `/api/articles/:id` | 指定されたIDの記事を削除。 |
-| `POST` | `/api/articles/:id/view` | 指定されたIDの記事の閲覧数をインクリメント。 |
+- デスクトップ: 3カラムグリッド
+- タブレット: 2カラムグリッド
+- スマートフォン: 1カラムグリッド
+
+## 🚀 デプロイ方法
+
+### Vercelにデプロイ
+
+1. GitHubにプッシュ
+2. Vercelにログイン
+3. プロジェクトをインポート
+4. ビルド設定を以下のように設定：
+   - Build Command: `npm run build`（不要な場合は空欄）
+   - Output Directory: `public`
+
+## 📞 お問い合わせ
+
+ご質問やご要望は、noteのコメントまたはXのDMにてお願いします。
+
+## 📄 ライセンス
+
+このプロジェクトはMITライセンスの下で公開されています。
+
+---
+
+© 2026 まにまにパパ All Rights Reserved.

@@ -1,0 +1,497 @@
+/* =====================================
+   まにまにパパの情報発信サイト - メインスタイルシート
+   ===================================== */
+
+/* リセット & 基本設定 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  /* カラースキーム */
+  --main-color: #4A90E2;
+  --accent-color: #FF6B6B;
+  --rakuten-color: #BF0000;
+  --bg-color: #F8F9FA;
+  --text-color: #333333;
+  --border-color: #e0e0e0;
+  --white: #ffffff;
+  --shadow: 0 2px 8px rgba(0,0,0,0.1);
+  --shadow-hover: 0 4px 12px rgba(0,0,0,0.15);
+
+  /* フォント */
+  --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "游ゴシック体", "Yu Gothic", YuGothic, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+  --line-height: 1.7;
+}
+
+body {
+  font-family: var(--font-family);
+  line-height: var(--line-height);
+  color: var(--text-color);
+  background-color: var(--bg-color);
+}
+
+/* =====================================
+   ヘッダー
+   ===================================== */
+header {
+  background: linear-gradient(135deg, var(--main-color) 0%, #357ABD 100%);
+  color: var(--white);
+  padding: 20px 0;
+  box-shadow: var(--shadow);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.header-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.site-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+nav a {
+  color: var(--white);
+  text-decoration: none;
+  font-weight: 500;
+  transition: opacity 0.3s;
+}
+
+nav a:hover {
+  opacity: 0.8;
+}
+
+/* =====================================
+   コンテナ
+   ===================================== */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.section {
+  margin-bottom: 60px;
+}
+
+.section-title {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 30px;
+  color: var(--text-color);
+  border-left: 4px solid var(--main-color);
+  padding-left: 15px;
+}
+
+/* =====================================
+   note記事カード（自分の記事）
+   ===================================== */
+.articles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.article-card {
+  background: var(--white);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: transform 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+}
+
+.article-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+}
+
+.article-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.article-card .content {
+  padding: 20px;
+}
+
+.article-card h3 {
+  font-size: 18px;
+  margin-bottom: 12px;
+  color: var(--text-color);
+  line-height: 1.4;
+}
+
+.article-card .meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  font-size: 14px;
+  color: #666;
+}
+
+.article-card .category-tag {
+  display: inline-block;
+  background: var(--main-color);
+  color: var(--white);
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.article-card .description {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 16px;
+  line-height: 1.6;
+}
+
+.article-card .read-more {
+  display: inline-block;
+  color: var(--main-color);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.article-card .read-more:hover {
+  color: var(--accent-color);
+}
+
+/* =====================================
+   参考記事リンク集
+   ===================================== */
+.reference-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.reference-card {
+  background: var(--white);
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: var(--shadow);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.reference-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+}
+
+.reference-card h3 {
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.reference-card h3 a {
+  color: var(--main-color);
+  text-decoration: none;
+}
+
+.reference-card h3 a:hover {
+  text-decoration: underline;
+}
+
+.reference-card .author {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 16px;
+}
+
+.reference-card .author a {
+  color: var(--main-color);
+  text-decoration: none;
+}
+
+.reference-card .my-comment {
+  background: #f0f7ff;
+  border-left: 3px solid var(--main-color);
+  padding: 12px 16px;
+  border-radius: 4px;
+  margin-bottom: 12px;
+}
+
+.reference-card .my-comment strong {
+  color: var(--main-color);
+  display: block;
+  margin-bottom: 8px;
+}
+
+.reference-card .date {
+  font-size: 12px;
+  color: #999;
+  text-align: right;
+}
+
+/* =====================================
+   楽天ROOMセクション
+   ===================================== */
+.rakuten-room-section {
+  background: linear-gradient(135deg, var(--rakuten-color) 0%, #ff4444 100%);
+  color: var(--white);
+  padding: 50px 30px;
+  border-radius: 16px;
+  text-align: center;
+  margin: 40px 0;
+  box-shadow: var(--shadow);
+}
+
+.rakuten-room-section h2 {
+  font-size: 32px;
+  margin-bottom: 16px;
+}
+
+.rakuten-room-section p {
+  font-size: 18px;
+  margin-bottom: 24px;
+  opacity: 0.95;
+}
+
+.room-btn {
+  display: inline-block;
+  background: var(--white);
+  color: var(--rakuten-color);
+  padding: 16px 48px;
+  text-decoration: none;
+  border-radius: 50px;
+  font-weight: bold;
+  font-size: 18px;
+  margin-top: 20px;
+  transition: transform 0.3s, box-shadow 0.3s;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.room-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+}
+
+.disclaimer {
+  font-size: 13px;
+  margin-top: 20px;
+  opacity: 0.85;
+}
+
+/* =====================================
+   メルカリセクション
+   ===================================== */
+.mercari-section {
+  margin: 60px 0;
+}
+
+.mercari-section .note {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.mercari-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.mercari-card {
+  background: var(--white);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.mercari-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+}
+
+.mercari-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  background: #f5f5f5;
+}
+
+.mercari-card .content {
+  padding: 16px;
+}
+
+.mercari-card h3 {
+  font-size: 16px;
+  margin-bottom: 8px;
+  color: var(--text-color);
+}
+
+.mercari-card .price {
+  color: #e32f2f;
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.mercari-card .description {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+.mercari-card .btn {
+  display: block;
+  background: #e32f2f;
+  color: var(--white);
+  text-align: center;
+  padding: 12px;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: background 0.3s;
+}
+
+.mercari-card .btn:hover {
+  background: #c82828;
+}
+
+/* =====================================
+   フッター
+   ===================================== */
+footer {
+  background: var(--text-color);
+  color: var(--white);
+  padding: 40px 20px;
+  margin-top: 80px;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-content h3 {
+  font-size: 20px;
+  margin-bottom: 20px;
+  border-bottom: 2px solid var(--main-color);
+  padding-bottom: 10px;
+}
+
+.footer-content h4 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  color: var(--main-color);
+}
+
+.legal-notice {
+  margin: 20px 0;
+  line-height: 1.8;
+}
+
+.legal-notice p {
+  margin-bottom: 16px;
+  font-size: 14px;
+}
+
+.copyright {
+  text-align: center;
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid #555;
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+/* =====================================
+   レスポンシブデザイン
+   ===================================== */
+@media (max-width: 768px) {
+  .header-container {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .site-title {
+    font-size: 20px;
+  }
+
+  nav ul {
+    gap: 12px;
+    font-size: 14px;
+  }
+
+  .section-title {
+    font-size: 22px;
+  }
+
+  .articles-grid,
+  .mercari-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .rakuten-room-section h2 {
+    font-size: 24px;
+  }
+
+  .rakuten-room-section p {
+    font-size: 16px;
+  }
+}
+
+/* =====================================
+   ユーティリティ
+   ===================================== */
+.text-center {
+  text-align: center;
+}
+
+.mt-20 {
+  margin-top: 20px;
+}
+
+.mb-20 {
+  margin-bottom: 20px;
+}
+
+/* スムーススクロール */
+html {
+  scroll-behavior: smooth;
+}
+
+/* ローディングアニメーション */
+.loading {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(74, 144, 226, 0.3);
+  border-radius: 50%;
+  border-top-color: var(--main-color);
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}

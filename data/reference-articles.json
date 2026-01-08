@@ -1,0 +1,14 @@
+{
+  "articles": [
+    {
+      "id": 1,
+      "title": "参考記事のタイトル",
+      "author": "noteユーザー名",
+      "authorUrl": "https://note.com/username",
+      "articleUrl": "https://note.com/username/n/...",
+      "myComment": "この記事のおかげで○○が解決できました。特に△△の部分が参考になり、自分の子育てにも活かせそうです。",
+      "addedDate": "2026-01-09",
+      "category": "子育て"
+    }
+  ]
+}
